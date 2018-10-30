@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>It's where I live</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 700px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    <title>About Me</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="right-sidebar is-preload">
+    <div id="page-wrapper">
+
+      <!-- Header -->
+        <div id="header">
+
+          <!-- Inner -->
+             <div class="inner"><d<header>
+                <h1><a href="index.html" id="logo">Karen Zeeb</a></h1>
+                <p>Lab 3 • Leaflet Map with json </p>
+              </header>
+            </div>
+
+          <!-- Nav -->
+            <nav id="nav">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                  <a href="#">Portfolios</a>
+                  <ul>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-carto-portfolio-2018">Cartography</a></li>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-design-portfolio-2018">Design</a></li>
+                    <li><a href="http://karen.zzzeeb.com/paintings.html">Painting</a></li>
+                    
+                  </ul>
+                </li>
+                <li><a href="MSGT.html">MSGT Labs</a></li>
+                <li><a href="mailto:kzeeb@uw.edu">Contact</a></li>
+              </ul>
+            </nav>
+
+        </div>
+        <p></p>
+
+    <div id="map"></div>
+      <script>
+      function initMap() {
+        // Styles a map in night mode.
+        var tacoma={lat: 47.2529, lng: -122.443};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 47.2529, lng: -122.443},
+          zoom: 12,
+     
+          styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#153a67"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#153a67"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#181818"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#a065b7"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#1b1b1b"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8a8a8a"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#373737"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c3c3c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#428dff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#428dff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4e4e4e"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#428dff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#483439"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d3d3d"
+      }
+    ]
+  }
+]
+        });
+        var Marker= new google.maps.Marker({position: tacoma,
+        	map:map,
+        	icon: 'paleblue_MarkerT.png'
+ })
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw9Z7_IwhuVrvwGFetbKxT5rueQloT2AU&callback=initMap"
+    async defer></script>
+    <p></p>
+    <!-- Footer -->
+        <div id="footer">
+          <div class="container">
+            <div class="row">
+
+              <!-- Tweets -->
+                <section class="col-4 col-12-mobile">
+                  <header>
+                    <h2 class="icon fa-instagram circled"><span class="label">Tweets</span></h2>
+                  </header>
+                  <ul class="divided">
+                    <li>
+                      <article class="post stub">
+                        <header>
+                          <h3><a href="https://www.instagram.com/karenzeeb_art/">Instagram</a></h3>
+                        </header>     
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+
+              <!-- Posts -->
+                <section class="col-4 col-12-mobile">
+                  <header>
+                    <h2 class="icon fa-file-text circled"><span class="label">Posts</span></h2>
+                  </header>
+                  <ul class="divided">
+                    <li>
+                      <article class="post stub">
+                        <header>
+                          <h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">My Resume</a></h3>
+                        </header>
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+              <section class="col-4 col-12-mobile">
+                  <header>
+                    <h2 class="icon fa-linkedin circled"><span class="label">Posts</span></h2>
+                  </header>
+                  <ul class="divided">
+                    <li>
+                      <article class="post stub">
+                        <header>
+                          <h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">Visit my LinkedIn</a></h3>
+                        </header>
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+            <hr />
+            <div class="row">
+              <div class="col-12">
+
+                <!-- Contact -->
+                  <section class="contact">
+                    <header>
+                      <h3>Love this website template? Me too!</h3>
+                    </header>
+                    <p>You can find this, and more at <a href="http://html5up.net">HTML5 UP.</p>
+                    
+                  </section>
+
+                <!-- Copyright -->
+                  <div class="copyright">
+                    <ul class="menu">
+                      <li>&copy; Karen Zeeb 2018. All rights reserved.</li>
+                    </ul>
+                  </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/jquery.dropotron.min.js"></script>
+      <script src="assets/js/jquery.scrolly.min.js"></script>
+      <script src="assets/js/jquery.scrollex.min.js"></script>
+      <script src="assets/js/browser.min.js"></script>
+      <script src="assets/js/breakpoints.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <script src="assets/js/main.js"></script>
+
+  </body>
+</html>
+  </body>
+</html>
