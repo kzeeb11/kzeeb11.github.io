@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 3</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+    #map{ width: 100%; height: 700px; }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <script>
+
+  // initialize the map
+  var map = new L.map('map').setView([47, -122], 8);
+
+  // base map
+  var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  minZoom: 0,
+  maxZoom: 20,
+  ext: 'png'
+});
+  map.addLayer(Stamen_Toner);
+  map.setView(new L.LatLng(44.3148, -85.6024), 7);
+
+  //add a local geojson file
+      //Thanks to https://www.igismap.com/add-load-geojson-file-point-polyline-polygon-map-leaflet-js/ for the tutorial
+      $.getJSON("MI_Bridges.geojson",function(data){
+      // add GeoJSON layer to the map once the file is loaded
+      var datalayer = L.geoJson(data ,{
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(type.name.properties);
+        }
+      }).addTo(map);
+      map.addLayer(datalayer);
+      map.fitBounds(datalayer.getBounds());
+      });
+
+  </script>
+</body>
+</html>
