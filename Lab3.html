@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>It's where I live</title>
+    <title>Michigan</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -20,6 +20,7 @@
   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
    crossorigin=""></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body class="right-sidebar is-preload">
     <div id="page-wrapper">
@@ -59,7 +60,7 @@
       <script>
 
   // initialize the map
-  var map = new L.map('map').setView([47, -122], 4);
+  var map = new L.map('map').setView([43.5, -85.6], 7);
 
   // base map
   var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
@@ -70,7 +71,14 @@
   ext: 'png'
 });
   map.addLayer(Stamen_Toner);
-  map.setView(new L.LatLng(44.3148, -85.6024), 7);
+  $.getJSON("Bridges_poor.geojson",function(data){
+    var datalayer = L.geoJson(data ,{
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(feature.properties.NAME_1);
+        }
+      }).addTo(map);
+      map.fitBounds(datalayer.getBounds());
+      });
 
   </script>
     <p></p>
