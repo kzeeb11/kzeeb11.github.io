@@ -79,7 +79,7 @@
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
-      }).addTo(map);
+      });
     
     $.getJSON("MI_income.geojson",function(data){
     var incomelayer = L.geoJson(data).addTo(map);
