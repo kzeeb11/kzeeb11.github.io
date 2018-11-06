@@ -74,10 +74,13 @@
   $.getJSON("Bridges_poor.geojson",function(data){
     var datalayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.NAME_1);
+          featureLayer.bindPopup(feature.properties.Facility);
         }
       }).addTo(map);
-      map.fitBounds(datalayer.getBounds());
+    
+    $.getJSON("MI_income.geojson",function(data){
+    var incomelayer = L.geoJson(data).addTo(map);
+      map.fitBounds(incomelayer.getBounds());
       });
 
   </script>
