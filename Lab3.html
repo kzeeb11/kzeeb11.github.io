@@ -82,21 +82,7 @@
         }
       });
     
-          $.getJSON("Bridges_Good.geojson",function(data){
-    var goodlayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.Facility);
-        }
-      });
-      
-            $.getJSON("Bridges_Fair.geojson",function(data){
-    var fairlayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.Facility);
-        }
-      });
-    
-    var markers = L.markerClusterGroup();
+      var markers = L.markerClusterGroup();
       //Add the markers to the datalayer
       markers.addLayer(datalayer);
       //add the markers to the map
