@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Michigan Bridge Index</title>
+    <title>Michigan</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -74,14 +74,16 @@
   ext: 'png'
 });
   map.addLayer(Stamen_Toner);
-  
-        $.getJSON("Bridges_poor.geojson",function(data){
+  $.getJSON("Bridges_poor.geojson",function(data){
     var datalayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
     
+    $.getJSON("MI_income.geojson",function(data){
+    var incomelayer = L.geoJson(data).addTo(map);
+      
       var markers = L.markerClusterGroup();
       //Add the markers to the datalayer
       markers.addLayer(datalayer);
@@ -95,14 +97,13 @@
           <article id="main" class="container special">
             <a href="#" class="image featured"><img src="#" alt="" /></a>
             <header>
-              <h2><a href="https://www.michigan.gov/mdot/0,4616,7-151-9618_47418---,00.html">Michigan Bridge Index</a></h2>
+              <h2><a href="">Dangerous Michigan Bridges</a></h2>
               <p>
                 Leaflet map using geojson data for Michigan bridges rated "poor." 
               </p>
             </header>
             <p>
-              Leaflet map using geojson data for Michigan bridges ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the entire shapefile in ARC, selected bridges by safety ratings and saved each layer. I used QGIS to convert the shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. I'll be working on adding a toggle menu for bridge by grade.</a></p>
-            <p><br></br></p>
+              Leaflet map using geojson data for Michigan bridges rated "poor." The information was obtained from Michigan Department of Transportation, and originally included data on all the bridges in the state. I put the entire shapefile in ARC, selected only the bridges with the lowest safety ratings and saved that layer. I used QGIS to convert that new shapefile into geojson and added it to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. There is also a polygon geojson layer that was obtained from US Census Block and has income data. I'll be working on converting this layer using a choropleth plug-in to show differentiation across the state.</a></p>
           </article>
     <!-- Footer -->
         <div id="footer">
