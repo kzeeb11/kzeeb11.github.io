@@ -81,13 +81,15 @@
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
-    $.getJSON("Bridges_Good.geojson",function(data){
+    
+          $.getJSON("Bridges_Good.geojson",function(data){
     var goodlayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
-      $.getJSON("Bridges_Fair.geojson",function(data){
+      
+            $.getJSON("Bridges_Fair.geojson",function(data){
     var fairlayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
@@ -96,7 +98,7 @@
     
     var markers = L.markerClusterGroup();
       //Add the markers to the datalayer
-      markers.addLayer(datalayer, goodlayer, fairlayer);
+      markers.addLayer(datalayer);
       //add the markers to the map
       map.addLayer(markers);
       map.fitBounds(datalayer.getBounds());
@@ -113,7 +115,7 @@
               </p>
             </header>
             <p>
-              Leaflet map using geojson data for Michigan bridges ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the entire shapefile in ARC, selected bridges by safety ratings and saved each layer. I used QGIS to convert the shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. I'll be working on adding a toggle menu for bridge rby grade.</a></p>
+              Leaflet map using geojson data for Michigan bridges ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the entire shapefile in ARC, selected bridges by safety ratings and saved each layer. I used QGIS to convert the shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. I'll be working on adding a toggle menu for bridge by grade.</a></p>
             <p><br></br></p>
           </article>
     <!-- Footer -->
