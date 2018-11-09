@@ -80,6 +80,18 @@
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
+    $.getJSON("Bridges_Good.geojson",function(data){
+    var datalayer = L.geoJson(data ,{
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(feature.properties.Facility);
+        }
+      });
+      $.getJSON("Bridges_Fair.geojson",function(data){
+    var datalayer = L.geoJson(data ,{
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(feature.properties.Facility);
+        }
+      });
     
     $.getJSON("MI_income.geojson",function(data){
     var incomelayer = L.geoJson(data).addTo(map);
