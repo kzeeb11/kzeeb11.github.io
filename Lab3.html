@@ -74,31 +74,29 @@
   ext: 'png'
 });
   map.addLayer(Stamen_Toner);
-  $.getJSON("Bridges_poor.geojson",function(data){
+  
+        $.getJSON("Bridges_poor.geojson",function(data){
     var datalayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
     $.getJSON("Bridges_Good.geojson",function(data){
-    var datalayer = L.geoJson(data ,{
+    var goodlayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
       $.getJSON("Bridges_Fair.geojson",function(data){
-    var datalayer = L.geoJson(data ,{
+    var fairlayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
     
-    $.getJSON("MI_income.geojson",function(data){
-    var incomelayer = L.geoJson(data).addTo(map);
-      
-      var markers = L.markerClusterGroup();
+    var markers = L.markerClusterGroup();
       //Add the markers to the datalayer
-      markers.addLayer(datalayer);
+      markers.addLayer(datalayer, goodlayer, fairlayer);
       //add the markers to the map
       map.addLayer(markers);
       map.fitBounds(datalayer.getBounds());
