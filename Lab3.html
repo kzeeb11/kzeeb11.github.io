@@ -59,7 +59,21 @@
         </div>
         <p></p>
 
-    <div id="map"></div>
+    
+    <div class="wrapper style2">
+          <article id="main" class="container special">
+            <a href="#" class="image featured"><img src="images/pic06_01.jpg" alt="Mackinac Bridge" /></a>
+            <header>
+              <h2><a href="https://www.michigan.gov/mdot/0,4616,7-151-9618_47418_47434-173571--,00.html">Michigan Bridge Index</a></h2>
+              <p>
+                Leaflet map using geojson data for Michigan bridge ratings. 
+              </p>
+            </header>
+            <p>
+              Leaflet map using geojson data for Michigan bridge ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the shapefile in ARC, selected bridges by safety rating and saved the individual layers. I used QGIS to convert the new shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. TI am woring on creating a toggle legend for good, fair, or poor bridge rating.</a></p>
+    <p><br></br></p>
+</article>
+<div id="map"></div>
       <script>
 
   // initialize the map
@@ -93,19 +107,6 @@
       });
  });
   </script>
-    <div class="wrapper style2">
-          <article id="main" class="container special">
-            <a href="#" class="image featured"><img src="images/pic06_01.jpg" alt="Mackinac Bridge" /></a>
-            <header>
-              <h2><a href="https://www.michigan.gov/mdot/0,4616,7-151-9618_47418_47434-173571--,00.html">Michigan Bridge Index</a></h2>
-              <p>
-                Leaflet map using geojson data for Michigan bridge ratings. 
-              </p>
-            </header>
-            <p>
-              Leaflet map using geojson data for Michigan bridge ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the shapefile in ARC, selected bridges by safety rating and saved the individual layers. I used QGIS to convert the new shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. TI am woring on creating a toggle legend for good, fair, or poor bridge rating.</a></p>
-    <p><br></br></p>
-</article>
     <!-- Footer -->
         <div id="footer">
           <div class="container">
