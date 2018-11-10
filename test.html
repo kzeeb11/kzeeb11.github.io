@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Test Page</title>
+    <title>Michigan Bridge Index</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -62,7 +62,7 @@
     
     <div class="wrapper style2">
           <article id="main" class="container special">
-            <a href="#" class="image featured"><img src="" alt="" /></a>
+            <a href="#" class="image featured"><img src="images/pic06_01.jpg" alt="Mackinac Bridge" /></a>
             <header>
               <h2><a href="https://www.michigan.gov/mdot/0,4616,7-151-9618_47418_47434-173571--,00.html">Michigan Bridge Index</a></h2>
               <p>
@@ -92,27 +92,25 @@
     var datalayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
-        }
-      });
-    
-   $.getJSON("Bridges_Fair.geojson",function(data){
+          
+    $.getJSON("Bridges_Fair.geojson",function(data){
     var fairlayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
-        }
-      });
-     
+          
      $.getJSON("Bridges_Good.geojson",function(data){
     var goodlayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
+    
+    $.getJSON("MI_income.geojson",function(data){
+    var incomelayer = L.geoJson(data).addTo(map);
+      
       var markers = L.markerClusterGroup();
       //Add the markers to the datalayer
       markers.addLayer(datalayer);
-       markers.addLayer(fairlayer);
-       markers.addLayer(goodlayer);
       //add the markers to the map
       map.addLayer(markers);
       map.fitBounds(datalayer.getBounds());
