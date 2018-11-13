@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Test Page</title>
+    <title>Michigan Bridge Index</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -59,21 +59,7 @@
         </div>
         <p></p>
 
-    
-    <div class="wrapper style2">
-          <article id="main" class="container special">
-            <a href="#" class="image featured"><img src="" alt="" /></a>
-            <header>
-              <h2><a href="https://www.michigan.gov/mdot/0,4616,7-151-9618_47418_47434-173571--,00.html">Michigan Bridge Index</a></h2>
-              <p>
-                Leaflet map using geojson data for Michigan bridge ratings. 
-              </p>
-            </header>
-            <p>
-              Leaflet map using geojson data for Michigan bridge ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the shapefile in ARC, selected bridges by safety rating and saved the individual layers. I used QGIS to convert the new shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. TI am woring on creating a toggle legend for good, fair, or poor bridge rating.</a></p>
-    <p><br></br></p>
-</article>
-<div id="map"></div>
+    <div id="map"></div>
       <script>
 
   // initialize the map
@@ -88,33 +74,58 @@
   ext: 'png'
 });
   map.addLayer(Stamen_Toner);
+  var controlLayers = L.control.layers().addTo(map);
+  
+  var poor = './geojson/MI_poor.geojson';
+  var fair = './geojson/MI_Fair.geojson';
+  var good = './geojson/MI_Good.geojson'
+
+
   $.getJSON("Bridges_poor.geojson",function(data){
     var datalayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.Facility);
-          
-    $.getJSON("Bridges_Fair.geojson",function(data){
-    var fairlayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.Facility);
-          
-     $.getJSON("Bridges_Good.geojson",function(data){
-    var goodlayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
           featureLayer.bindPopup(feature.properties.Facility);
         }
       });
     
-    var markers = L.markerClusterGroup();
+    $.getJSON("Bridges_Fair.geojson",function(data){
+    var fairlayer = L.geoJson(data ,{
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(feature.properties.Facility);
+        }
+      });
+
+    $.getJSON("Bridges_Good.geojson",function(data){
+    var goodlayer = L.geoJson(data ,{
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(feature.properties.Facility);
+        }
+      });
+      
+      var markers = L.markerClusterGroup();
       //Add the markers to the datalayer
       markers.addLayer(datalayer);
       //add the markers to the map
       map.addLayer(markers);
       map.fitBounds(datalayer.getBounds());
-     });
+      });
    });
-          
+  }); 
+
   </script>
+    <div class="wrapper style2">
+          <article id="main" class="container special">
+            <a href="#" class="image featured"><img src="#" alt="" /></a>
+            <header>
+              <h2><a href="">Michigan Bridge Index</a></h2>
+              <p>
+                Leaflet map using geojson data for Michigan bridges rated "poor." 
+              </p>
+            </header>
+            <p>
+              Leaflet map using geojson data for Michigan bridge ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the shapefile in ARC, selected bridges by safety rating and saved the individual layers. I used QGIS to convert the new shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. TI am woring on creating a toggle legend for good, fair, or poor bridge rating.</a></p>
+            <p><br></br></p>
+          </article>
     <!-- Footer -->
         <div id="footer">
           <div class="container">
