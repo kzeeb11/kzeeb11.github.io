@@ -70,12 +70,12 @@
 			            .setHTML(description)
 			            .addTo(map);
  });
- <div id="map"></div>
+ <div id="map2"></div>
     <script>
       function initMap() {
         // Styles a map in night mode.
         var tacoma={lat: 47.2529, lng: -122.443};
-        var map = new google.maps.Map(document.getElementById('map'), {
+        var map = new google.maps.Map(document.getElementById('map2'), {
           center: {lat: 47.2529, lng: -122.443},
           zoom: 12,
      
@@ -330,7 +330,7 @@
 ]
         });
         var Marker= new google.maps.Marker({position: tacoma,
-        	map:map,
+        	map:map2,
         	icon: 'paleblue_MarkerT.png'
  })
       }
