@@ -1,51 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Lab 3</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-   crossorigin=""></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <style>
-    #map{ width: 100%; height: 700px; }
-  </style>
-</head>
-<body>
+	<head>
+		<title>Lab 4 Test</title>
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+	</head>
 
-  <div id="map"></div>
+	<body>
+		<!-- the div for the map -->
+		<!-- note the style is in-line, we have been putting it in the header. Outcome is the same -->
+		<div id='map' style='width: 100%; height: 500px;'></div>
+		<!-- the script that controls the map -->
+		<script>
+			//my Mapbox token
+			mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
+			
+			//The map variable
+			var map = new mapboxgl.Map({
+			    container: 'map',
+			    style: 'mapbox://styles/kzeeb/cjo7ciqb1254t2smro47yyty0',
+			});
+			//set the center & zoom of the map
+			map.setCenter([-85, 44]);
+			map.setZoom(3);
 
-  <script>
+			//on map load, do some stuff
+			map.on('load', function(){
+				//add a source layer for earthquakes
+				map.addSource('earthquakes', {
+			        "type": "geojson",
+			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+			    });
+			    //add the earthquakes to the map
+			    map.addLayer({
+			    	"id":"equakes",
+			    	"type":"circle",
+				"source":"earthquakes",
+				"circle-color": [
+				    'range',
+				    ['get', 'mag'],
+				    '1-3', '#FFCCCC',
+				    '3.1-5', '#FF6666',
+				    '5.1-6.5', '#E3170D',
+				    '6.6-11', '#8B0000',
+				]
+    });
+ });
 
-  // initialize the map
-  var map = new L.map('map').setView([47, -122], 8);
+				//add a handler for clicking/popups 
+				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+				map.on('click', 'equakes', function (e) {
+			        var coordinates = e.features[0].geometry.coordinates.slice();
+			        //print the properties to the console when clicked
+			        console.log(e.features[0].properties);
+			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
+			        var description = "<p>Mag: " + e.features[0].properties.mag 
+				+ "<br>Location: " + e.features[0].properties.place 
+				+ "<br>Link: "+"<a href='"+e.features[0].properties.url+"'>Click here</a></p>";
+			        //var description = e.features[0].properties.mag;
 
-  // base map
-  var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-});
-  map.addLayer(Stamen_Toner);
-  map.setView(new L.LatLng(44.3148, -85.6024), 7);
 
-  //add a local geojson file
-      //Thanks to https://www.igismap.com/add-load-geojson-file-point-polyline-polygon-map-leaflet-js/ for the tutorial
-      $.getJSON("MI_Bridges.geojson",function(data){
-      // add GeoJSON layer to the map once the file is loaded
-      var datalayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(type.name.properties);
-        }
-      }).addTo(map);
-      map.addLayer(datalayer);
-      map.fitBounds(datalayer.getBounds());
-      });
+			        // Ensure that if the map is zoomed out such that multiple
+			        // copies of the feature are visible, the popup appears
+			        // over the copy being pointed to.
+			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        }
+			        //make the popup
+			        new mapboxgl.Popup()
+			            .setLngLat(coordinates)
+			            .setHTML(description)
+			            .addTo(map);
+ });
 
-  </script>
-</body>
+		</script>
+	</body>
 </html>
