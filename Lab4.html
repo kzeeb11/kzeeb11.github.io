@@ -35,8 +35,10 @@
 			    map.addLayer({
 			    	"id":"equakes",
 			    	"type":"circle",
-				"color": "white",
-			    	"source":"earthquakes"
+				"source":"earthquakes"
+				 'circle-color':[
+				    'match',
+				    ['get', 'mag'],
 			    });
 
 				//add a handler for clicking/popups 
