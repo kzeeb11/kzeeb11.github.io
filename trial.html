@@ -52,17 +52,26 @@
 			    	"type":"circle",
 				"source":"earthquakes",
 				"paint": {
-					'circle-color': '#D49A66',
+					'circle-color': {
+					property:'mag',
+					stops: [
+					[2, '#ffa27f']
+					[4, '#ff6a32']
+					[6, '#ff4500']
+					[8, '#cc3700']
+					[10,' #7f2200']	
+					]
+					}
 				 // Add data-driven styles for circle radius
 					 'circle-radius': {
 					 property: 'mag',
 					 type: 'exponential',
 					 stops: [
-					[2, 2],
-					[4, 4],
-					[6, 6],
+					[2, 3],
+					[4, 5],
+					[6, 7],
 					[8, 8],
-					[10, 10]
+					[10, 12]
 					]
      				 	}
 				}		
