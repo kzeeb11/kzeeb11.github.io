@@ -91,7 +91,7 @@
   maxZoom: 20,
   ext: 'png'
 });
-  map.addLayer(Stamen_Toner);
+  map2.addLayer(Stamen_Toner);
   $.getJSON("Bridges_poor.geojson",function(data){
     var datalayer = L.geoJson(data ,{
         onEachFeature: function(feature, featureLayer) {
@@ -102,8 +102,8 @@
       //Add the markers to the datalayer
       markers.addLayer(datalayer);
       //add the markers to the map
-      map.addLayer(markers);
-      map.fitBounds(datalayer.getBounds());
+      map2.addLayer(markers);
+      map2.fitBounds(datalayer.getBounds());
       });
 </script>
 	</body>
