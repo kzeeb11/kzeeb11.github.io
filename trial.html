@@ -117,8 +117,8 @@
   maxZoom: 20,
   ext: 'png'
 });
-  $.getJSON("https://data.seattle.gov/api/views/q773-8un5/rows.json?accessType=DOWNLOAD3",function(data){
-    var secondlayer = L.geoJson(data).addTo(map);
+  $.getJSON("https://api.darksky.net/forecast/a9622f44445c1f58f0b959aeec373c4f/37.8267,-122.4233",function(data){
+    var firelayer = L.geoJson(data).addTo(map);
 	});  
 </script>
 	</body>
