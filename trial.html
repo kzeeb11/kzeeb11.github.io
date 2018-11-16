@@ -117,19 +117,10 @@
   maxZoom: 20,
   ext: 'png'
 });
-  map2.addLayer(Stamen_Toner);
-  $.getJSON("Bridges_poor.geojson",function(data){
-    var datalayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.Facility);
-        }
-      });
-  var markers = L.markerClusterGroup();
-      //Add the markers to the datalayer
-      markers.addLayer(datalayer);
-      //add the markers to the map
-      map2.addLayer(markers);
-      map2.fitBounds(datalayer.getBounds());
+  map2.addSource('fires', {
+			        "type": "geojson",
+			        "data": "https://api.darksky.net/forecast/81c6b3e693a8c561e048937064d4cdde/37.8267,-122.4233"
+			    });
       });
 </script>
 	</body>
