@@ -59,6 +59,7 @@ var map = new mapboxgl.Compare(beforeMap, afterMap, {
     // mousemove: true
 });
     //on map load, do some stuff
+	<script>
 			map.on('load', function(){
 				//add a source layer for earthquakes
 				map.addSource('earthquakes', {
