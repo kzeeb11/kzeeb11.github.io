@@ -162,9 +162,9 @@
 			//on map load, do some stuff
 			map2.on('load', function(){
 				//add a source layer for earthquakes
-				map2.addSource('earthquakes', {
+				map2.addSource('seattlerds', {
 			        "type": "geojson",
-			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+			        "data": "https://data.seattle.gov/api/views/q773-8un5/rows.json?accessType=DOWNLOAD"
 			    });
 			    //add the earthquakes to the map
 			    map2.addLayer({
