@@ -108,18 +108,82 @@
 		<div id='map2' style='width: 100%; height: 400px;'></div>
       <script>
 
-  var map2 = new L.map('map2').setView([43.5, -85.6], 5);
+  //my Mapbox token
+			mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
+			
+			//The map variable
+			var map2 = new mapboxgl.Map({
+			    container: 'map',
+			    style: 'mapbox://styles/kzeeb/cjo7ciqb1254t2smro47yyty0',
+			});
+			//set the center & zoom of the map
+			map.setCenter([-85, 44]);
+			map.setZoom(6);
 
-  var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-});
-  $.getJSON("https://api.darksky.net/forecast/a9622f44445c1f58f0b959aeec373c4f/37.8267,-122.4233",function(data){
-    var firelayer = L.geoJson(data).addTo(map);
-	});  
-</script>
+			//on map load, do some stuff
+			map.on('load', function(){
+				//add a source layer for earthquakes
+				map.addSource('earthquakes', {
+			        "type": "geojson",
+			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+			    });
+			    //add the earthquakes to the map
+			    map.addLayer({
+			    	"id":"equakes",
+			    	"type":"circle",
+				"source":"earthquakes",
+				"paint": {
+					'circle-color': {
+					property:'mag',
+					stops: [
+					[2, '#f46b0f'],
+					[5, '#0b6f95'],
+					[7, '#7f2200'],
+					[10, '#f40fdf']
+					]
+					},
+				 // Add data-driven styles for circle radius
+					 'circle-radius': {
+					 property: 'mag',
+					 type: 'exponential',
+					 stops: [
+					[2, 3],
+					[4, 5],
+					[6, 7],
+					[8, 8],
+					[10, 12]
+					]
+     				 	}
+				}		
+						
+	 });				
+ });
+
+				//add a handler for clicking/popups 
+				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+				map.on('click', 'equakes', function (e) {
+			        var coordinates = e.features[0].geometry.coordinates.slice();
+			        //print the properties to the console when clicked
+			        console.log(e.features[0].properties);
+			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
+			        var description = "<p>Mag: " + e.features[0].properties.mag 
+				+ "<br>Location: " + e.features[0].properties.place 
+				+ "<br>Link: "+"<a href='"+e.features[0].properties.url+"'>Click here</a></p>";
+			        //var description = e.features[0].properties.mag;
+
+
+			        // Ensure that if the map is zoomed out such that multiple
+			        // copies of the feature are visible, the popup appears
+			        // over the copy being pointed to.
+			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        }
+			        //make the popup
+			        new mapboxgl.Popup()
+			            .setLngLat(coordinates)
+			            .setHTML(description)
+			            .addTo(map);
+ });
+		</script>
 	</body>
 </html>
