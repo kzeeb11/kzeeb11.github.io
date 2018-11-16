@@ -2,9 +2,10 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Create a time slider</title>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
-		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+    <title>Swipe between maps</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -13,169 +14,49 @@
 <body>
 
 <style>
-.map-overlay {
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+body {
+    overflow: hidden;
+}
+
+body * {
+   -webkit-touch-callout: none;
+     -webkit-user-select: none;
+        -moz-user-select: none;
+         -ms-user-select: none;
+             user-select: none;
+}
+
+.map {
     position: absolute;
-    width: 25%;
     top: 0;
-    left: 0;
-    padding: 10px;
-}
-
-.map-overlay .map-overlay-inner {
-    background-color: #fff;
-    box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
-    border-radius: 3px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.map-overlay h2 {
-    line-height: 24px;
-    display: block;
-    margin: 0 0 10px;
-}
-
-.map-overlay .legend .bar {
-    height: 10px;
+    bottom: 0;
     width: 100%;
-    background: linear-gradient(to right, #FCA107, #7F3121);
-}
-
-.map-overlay input {
-    background-color: transparent;
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    margin: 0;
-    cursor: ew-resize;
 }
 </style>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css' type='text/css' />
 
-<div id='map'></div>
-
-<div class='map-overlay top'>
-    <div class='map-overlay-inner'>
-        <h2>Significant earthquakes in 2015</h2>
-        <label id='month'></label>
-        <input id='slider' type='range' min='0' max='11' step='1' value='0' />
-    </div>
-    <div class='map-overlay-inner'>
-        <div id='legend' class='legend'>
-            <div class='bar'></div>
-            <div>Magnitude (m)</div>
-        </div>
-    </div>
-</div>
-
-<script src='//d3js.org/d3.v3.min.js' charset='utf-8'></script>
+<div id='before' class='map'></div>
+<div id='after' class='map'></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
-var map = new mapboxgl.Map({
-    container: 'map',
+var beforeMap = new mapboxgl.Map({
+    container: 'before',
     style: 'mapbox://styles/kzeeb/cjo7ciqb1254t2smro47yyty0',
-    center: [31.4606, 20.7927],
-    zoom: 0.5
+    center: [0, 0],
+    zoom: 0
 });
 
-var months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-];
+var afterMap = new mapboxgl.Map({
+    container: 'after',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [0, 0],
+    zoom: 0
+});
 
-function filterBy(month) {
-
-    var filters = ['==', 'month', month];
-    map.setFilter('earthquake-circles', filters);
-    map.setFilter('earthquake-labels', filters);
-
-    // Set the label to the month
-    document.getElementById('month').textContent = months[month];
-}
-
-map.on('load', function() {
-
-    // Data courtesy of http://earthquake.usgs.gov/
-    // Query for significant earthquakes in 2015 URL request looked like this:
-    // http://earthquake.usgs.gov/fdsnws/event/1/query
-    //    ?format=geojson
-    //    &starttime=2015-01-01
-    //    &endtime=2015-12-31
-    //    &minmagnitude=6'
-    //
-    // Here we're using d3 to help us make the ajax request but you can use
-    // Any request method (library or otherwise) you wish.
-    d3.json('https://www.mapbox.com/mapbox-gl-js/assets/significant-earthquakes-2015.geojson', function(err, data) {
-        if (err) throw err;
-
-        // Create a month property value based on time
-        // used to filter against.
-        data.features = data.features.map(function(d) {
-            d.properties.month = new Date(d.properties.time).getMonth();
-            return d;
-        });
-
-        map.addSource('earthquakes', {
-            'type': 'geojson',
-            'data': data
-        });
-
-        map.addLayer({
-            'id': 'earthquake-circles',
-            'type': 'circle',
-            'source': 'earthquakes',
-            'paint': {
-                'circle-color': [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'mag'],
-                    6, '#FCA107',
-                    8, '#7F3121'
-                ],
-                'circle-opacity': 0.75,
-                'circle-radius': [
-                    'interpolate',
-                    ['linear'],
-                    ['get', 'mag'],
-                    6, 20,
-                    8, 40
-                ]
-            }
-        });
-
-        map.addLayer({
-            'id': 'earthquake-labels',
-            'type': 'symbol',
-            'source': 'earthquakes',
-            'layout': {
-                'text-field': ['concat', ['to-string', ['get', 'mag']], 'm'],
-                'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-                'text-size': 12
-            },
-            'paint': {
-                'text-color': 'rgba(0,0,0,0.5)'
-            }
-        });
-
-        // Set filter to first month of the year
-        // 0 = January
-        filterBy(0);
-
-        document.getElementById('slider').addEventListener('input', function(e) {
-            var month = parseInt(e.target.value, 10);
-            filterBy(month);
-        });
-    });
+var map = new mapboxgl.Compare(beforeMap, afterMap, {
+    // Set this to enable comparing two maps by mouse movement:
+    // mousemove: true
 });
 </script>
 
