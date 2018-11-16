@@ -117,11 +117,10 @@
   maxZoom: 20,
   ext: 'png'
 });
-  map.addSource('fires', {
-			        "type": "geojson",
-			        "data": "https://api.darksky.net/forecast/81c6b3e693a8c561e048937064d4cdde/37.8267,-122.4233"
+  $.getJSON("https://api.darksky.net/forecast/81c6b3e693a8c561e048937064d4cdde/37.8267,-122.4233",function(data){
+    var firelayer = L.geoJson(data).addTo(map);
+	});  
 			    });
-
 </script>
 	</body>
 </html>
