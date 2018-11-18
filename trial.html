@@ -2,28 +2,11 @@
 <html>
 	<head>
 		<title>Lab 4 Test</title>
-		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
-		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-		<meta charset="utf-8" />
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   crossorigin=""/>
-	</head>
-	 <title>About Me</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-   crossorigin=""></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.css"/>
-  <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.Default.css"/>
-  <script src="Leaflet.markercluster-master/dist/leaflet.markercluster-src.js"></script>
+		<!-- the mapbox libraries -->
+		<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+		<!-- Omnivore plugin to use KML -->
+		<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
   </head>
   <body class="right-sidebar is-preload">
     <div id="page-wrapper">
@@ -222,6 +205,13 @@
 			            .setLngLat(coordinates)
 			            .setHTML(description)
 			            .addTo(map2);
+			
+			//add the KML Layer using Omnivore
+			var runLayer = omnivore.kml('https://www.epa.gov/airnow/today/airnow.kml')
+		    .on('ready', function() {
+		        map.fitBounds(runLayer.getBounds());
+		    })
+		    .addTo(map);
  });
 		</script>
 	</body>
