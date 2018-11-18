@@ -146,7 +146,7 @@
 			
 			    //add the fires to the map
 			    //add the KML Layer using Omnivore
-			var runLayer = omnivore.kml('https://fsapps.nwcg.gov/data/kml/conus_latest_AFM_bundle.kml')
+			var runLayer = omnivore.kml('https://cors-anywhere.herokuapp.com/https://fsapps.nwcg.gov/data/kml/conus_latest_AFM_bundle.kml')
 		    .on('ready', function() {
 		        map.fitBounds(runLayer.getBounds());
 		    })
