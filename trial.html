@@ -148,16 +148,16 @@
 
 			//on map load, do some stuff
 			map2.on('load', function(){
-				//add a source layer for earthquakes
-				map2.addSource('earthquakes', {
-			        "type": "geojson",
-			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+				//add a source layer for fires
+				map2.addSource('fires', {
+			        "type": "kml",
+			        "data": "https://www.epa.gov/airnow/today/airnow.kml"
 			    });
-			    //add the earthquakes to the map
+			    //add the fires to the map
 			    map2.addLayer({
-			    	"id":"equakes",
+			    	"id":"fires",
 			    	"type":"circle",
-				"source":"earthquakes",
+				"source":"fires",
 				"paint": {
 					'circle-color': {
 					property:'mag',
