@@ -143,76 +143,10 @@
 			    container: 'map2',
 			    style: 'mapbox://styles/kzeeb/cjokfogz701402sp3fhqec8r5',
 			});
-			//set the center & zoom of the map
-			map2.setCenter([-85, 44]);
-			map2.setZoom(3);
-
-			//on map load, do some stuff
-			map2.on('load', function(){
-				//add a source layer for fires
-				map2.addSource('fires', {
-			        "type": "kml",
-			        "data": "https://www.epa.gov/airnow/today/airnow.kml"
-			    });
-			    //add the fires to the map
-			    map2.addLayer({
-			    	"id":"fires",
-			    	"type":"circle",
-				"source":"fires",
-				"paint": {
-					'circle-color': {
-					property:'mag',
-					stops: [
-					[2, '#f46b0f'],
-					[5, '#0b6f95'],
-					[7, '#7f2200'],
-					[10, '#f40fdf']
-					]
-					},
-				 // Add data-driven styles for circle radius
-					 'circle-radius': {
-					 property: 'mag',
-					 type: 'exponential',
-					 stops: [
-					[2, 3],
-					[4, 5],
-					[6, 7],
-					[8, 8],
-					[10, 12]
-					]
-     				 	}
-				}		
-						
-	 });				
- });
-
-				//add a handler for clicking/popups 
-				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
-				map2.on('click', 'equakes', function (e) {
-			        var coordinates = e.features[0].geometry.coordinates.slice();
-			        //print the properties to the console when clicked
-			        console.log(e.features[0].properties);
-			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
-			        var description = "<p>Mag: " + e.features[0].properties.mag 
-				+ "<br>Location: " + e.features[0].properties.place 
-				+ "<br>Link: "+"<a href='"+e.features[0].properties.url+"'>Click here</a></p>";
-			        //var description = e.features[0].properties.mag;
-
-
-			        // Ensure that if the map is zoomed out such that multiple
-			        // copies of the feature are visible, the popup appears
-			        // over the copy being pointed to.
-			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-			        }
-			        //make the popup
-			        new mapboxgl.Popup()
-			            .setLngLat(coordinates)
-			            .setHTML(description)
-			            .addTo(map2);
 			
-			//add the KML Layer using Omnivore
-			var runLayer = omnivore.kml('https://www.epa.gov/airnow/today/airnow.kml')
+			    //add the fires to the map
+			    //add the KML Layer using Omnivore
+			var runLayer = omnivore.kml('https://fsapps.nwcg.gov/data/kml/conus_latest_AFM_bundle.kml')
 		    .on('ready', function() {
 		        map.fitBounds(runLayer.getBounds());
 		    })
