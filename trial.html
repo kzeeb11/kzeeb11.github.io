@@ -167,9 +167,7 @@ map2.addLayer(Stamen_Toner);
 	      
   //add a KML layer - uses cors-anywhere to bypass the CORS restrictions on NOAA. TEMPORARY WORKAROUND, Eventually need to hook up a server instead of doing it this way. 
 			var snowPoly = omnivore.kml('https://cors-anywhere.herokuapp.com/https://fsapps.nwcg.gov/data/kml/conus_latest_AFM_bundle.kml')
-				.on('ready', function() {
-			        map2.fitBounds(snowPoly.getBounds());
-			    })
+				
 			.addTo(map2);
 	      
 		</script>
