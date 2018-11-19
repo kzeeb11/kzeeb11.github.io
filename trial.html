@@ -4,9 +4,11 @@
 		<title>Lab 4 Test</title>
 		<!-- the HTML5UP libraries -->
 		<meta charset="utf-8" />
+		<!-- the Omnivore plugin to convert KML to GeoJSON -->
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 		<style>
       #map2 {
-        height: 600px;  /* The height is 400 pixels */
+        height: 400px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        }
     </style>
@@ -163,13 +165,13 @@
   
 map2.addLayer(Stamen_Toner);
 	      
-  $.getJSON("Bridges_poor.geojson",function(data){
-    var datalayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.Facility);
-        }
-      });
- });
+  //add a KML layer - uses cors-anywhere to bypass the CORS restrictions on NOAA. TEMPORARY WORKAROUND, Eventually need to hook up a server instead of doing it this way. 
+			var snowPoly = omnivore.kml('https://cors-anywhere.herokuapp.com/https://www.wpc.ncep.noaa.gov/kml/winwx/HPC_Day1-3_psnow_gt_04_latest.kml')
+				.on('ready', function() {
+			        map2.fitBounds(snowPoly.getBounds());
+			    })
+			.addTo(map2);
+	      
 		</script>
 	</body>
 </html>
