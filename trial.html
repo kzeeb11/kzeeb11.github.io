@@ -166,7 +166,7 @@
 map2.addLayer(Stamen_Toner);
 	      
   //add a KML layer - uses cors-anywhere to bypass the CORS restrictions on NOAA. TEMPORARY WORKAROUND, Eventually need to hook up a server instead of doing it this way. 
-			var firelayer = omnivore.kml('https://cors-anywhere.herokuapp.com/https://fsapps.nwcg.gov/data/kml/conus_latest_AFM_bundle.kml');
+			var firelayer = omnivore.kml('https://cors-anywhere.herokuapp.com/https://firms.modaps.eosdis.nasa.gov/active_fire/c6/kml/MODIS_C6_USA_contiguous_and_Hawaii_24h.kml');
 				
 			map2.addLayer(firelayer);
 	      
