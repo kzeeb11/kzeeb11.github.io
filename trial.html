@@ -169,6 +169,10 @@ map2.addLayer(Stamen_Toner);
 			var firelayer = omnivore.kml('https://cors-anywhere.herokuapp.com/https://firms.modaps.eosdis.nasa.gov/active_fire/c6/kml/MODIS_C6_USA_contiguous_and_Hawaii_24h.kml');
 				
 			map2.addLayer(firelayer);
+	      var popup = L.popup()
+    .setLatLng([51.5, -0.09])
+    .setContent("I am a standalone popup.")
+    .openOn(map2);
 	      
 		</script>
 	</body>
