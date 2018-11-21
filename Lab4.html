@@ -1,26 +1,68 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Lab 4 Test</title>
-		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
-		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+		<title>Lab 4</title>
+		<!-- the HTML5UP libraries -->
 		<meta charset="utf-8" />
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+		<!-- the Omnivore plugin to convert KML to GeoJSON -->
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+		<style>
+      #map2 {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<!-- the mapbox libraries -->
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+		<!-- Omnivore plugin to use KML -->
+		<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+		<!-- the Leaflet libraries -->
+		 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
    crossorigin=""/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-   crossorigin="">
-		</script>
-		<link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.css"/>
-  <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.Default.css"/>
-  <script src="Leaflet.markercluster-master/dist/leaflet.markercluster-src.js"></script>
-	</head>
+   crossorigin=""></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body class="right-sidebar is-preload">
+    <div id="page-wrapper">
 
+      <!-- Header -->
+        <div id="header">
+
+          <!-- Inner -->
+             <div class="inner"><d<header>
+                <h1><a href="index.html" id="logo">Karen Zeeb</a></h1>
+                <p>Lab 4 • Earthquake and Active Fires Real Time Maps</p>
+              </header>
+            </div>
+
+          <!-- Nav -->
+            <nav id="nav">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                  <a href="#">Portfolios</a>
+                  <ul>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-carto-portfolio-2018">Cartography</a></li>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-design-portfolio-2018">Design</a></li>
+                    <li><a href="http://karen.zzzeeb.com/paintings.html">Painting</a></li>
+                    
+                  </ul>
+                </li>
+                <li><a href="about-me.html">About Me</a></li>
+                <li><a href="MSGT.html">MSGT Labs</a></li>
+                <li><a href="mailto:kzeeb@uw.edu">Contact</a></li>
+              </ul>
+            </nav>
+
+        </div>
+	  <p></p>
 	<body>
 		<!-- the div for the map -->
 		<!-- note the style is in-line, we have been putting it in the header. Outcome is the same -->
@@ -36,7 +78,7 @@
 			    style: 'mapbox://styles/kzeeb/cjo7ciqb1254t2smro47yyty0',
 			});
 			//set the center & zoom of the map
-			map.setCenter([-85, 44]);
+			map.setCenter([-85, 49]);
 			map.setZoom(3);
 
 			//on map load, do some stuff
@@ -104,86 +146,93 @@
 			            .addTo(map);
  });
 		</script>
-			
-		<div id='map2' style='width: 100%; height: 400px;'></div>
+			<p></p>
+				
+		<div id="map2"></div>
       <script>
 
-  //my Mapbox token
-			mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
-			
-			//The map variable
-			var map2 = new mapboxgl.Map({
-			    container: 'map2',
-			    style: 'mapbox://styles/kzeeb/cjo7ciqb1254t2smro47yyty0',
-			});
-			//set the center & zoom of the map
-			map2.setCenter([-85, 44]);
-			map2.setZoom(6);
+  // initialize the map
+  var map2 = new L.map('map2').setView([43.5, -85.6], 5);
 
-			//on map load, do some stuff
-			map2.on('load', function(){
-				//add a source layer for earthquakes
-				map2.addSource('earthquakes', {
-			        "type": "geojson",
-			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
-			    });
-			    //add the earthquakes to the map
-			    map2.addLayer({
-			    	"id":"equakes",
-			    	"type":"circle",
-				"source":"earthquakes",
-				"paint": {
-					'circle-color': {
-					property:'mag',
-					stops: [
-					[2, '#f46b0f'],
-					[5, '#0b6f95'],
-					[7, '#7f2200'],
-					[10, '#f40fdf']
-					]
-					},
-				 // Add data-driven styles for circle radius
-					 'circle-radius': {
-					 property: 'mag',
-					 type: 'exponential',
-					 stops: [
-					[2, 3],
-					[4, 5],
-					[6, 7],
-					[8, 8],
-					[10, 12]
-					]
-     				 	}
-				}		
-						
-	 });				
- });
-
-				//add a handler for clicking/popups 
-				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
-				map2.on('click', 'equakes', function (e) {
-			        var coordinates = e.features[0].geometry.coordinates.slice();
-			        //print the properties to the console when clicked
-			        console.log(e.features[0].properties);
-			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
-			        var description = "<p>Mag: " + e.features[0].properties.mag 
-				+ "<br>Location: " + e.features[0].properties.place 
-				+ "<br>Link: "+"<a href='"+e.features[0].properties.url+"'>Click here</a></p>";
-			        //var description = e.features[0].properties.mag;
-
-
-			        // Ensure that if the map is zoomed out such that multiple
-			        // copies of the feature are visible, the popup appears
-			        // over the copy being pointed to.
-			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-			        }
-			        //make the popup
-			        new mapboxgl.Popup()
-			            .setLngLat(coordinates)
-			            .setHTML(description)
-			            .addTo(map2);
- });
+  // base map
+  var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  minZoom: 0,
+  maxZoom: 20,
+  ext: 'png'
+});
+  
+map2.addLayer(Stamen_Toner);
+	      
+  //add a KML layer - uses cors-anywhere to bypass the CORS restrictions on NOAA. TEMPORARY WORKAROUND, Eventually need to hook up a server instead of doing it this way. 
+			var firelayer = omnivore.kml('https://cors-anywhere.herokuapp.com/https://firms.modaps.eosdis.nasa.gov/active_fire/c6/kml/MODIS_C6_USA_contiguous_and_Hawaii_24h.kml');
+				
+			map2.addLayer(firelayer);
 		</script>
 	</body>
+	   </section>
+
+        </div>
+<p></p>
+<!-- Footer -->
+		<div id="footer">
+		<div class="container">
+		<div class="row">
+
+			<!-- IG -->
+			<section class="col-4 col-12-mobile">
+			<header>
+			<h3><a href="https://www.instagram.com/karenzeeb_art/">Instagram</a></h3>
+			</header>			
+			</section>
+
+			<!-- Resume -->
+			<section class="col-4 col-12-mobile">
+			<header>
+			<h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">My Resume</a></h3>
+			</header>
+			</article>
+			</section>
+			
+			<!--LinkedIn -->
+			<section class="col-4 col-12-mobile">
+			<header>
+			<h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">LinkedIn</a></h3>
+			</header>
+			</article>
+			</section>
+			</div>
+			<hr />
+			
+			<div class="row">
+			<div class="col-12">
+
+			<!-- Contact -->
+			<section class="contact">
+			<header>
+			<h3>Love this website template? Me too!</h3>
+			</header>
+			<p>You can find this, and more at <a href="http://html5up.net">HTML5 UP.</p>
+			</section>
+
+			<!-- Copyright -->
+			<div class="copyright">
+			<ul class="menu">
+			<li>&copy; Karen Zeeb 2018. All rights reserved.</li>
+			</ul>
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
+
