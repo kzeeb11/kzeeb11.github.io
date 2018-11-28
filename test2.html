@@ -1,45 +1,309 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-    <meta charset='utf-8' />
-    <title>Add live realtime data</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
+	<head>
+		<title>Lab 5</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+
+    	<style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
-</head>
-<body>
 
-<div id='map'></div>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
 
+			<!-- Header -->
+        <div id="header">
+
+          <!-- Inner -->
+             <div class="inner"><d<header>
+                <h1><a href="index.html" id="logo">Karen Zeeb</a></h1>
+                <p>Lab 5 • The sharknado threat is real</p>
+              </header>
+            </div>
+
+          <!-- Nav -->
+            <nav id="nav">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                  <a href="#">Portfolios</a>
+                  <ul>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-carto-portfolio-2018">Cartography</a></li>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-design-portfolio-2018">Design</a></li>
+                    <li><a href="http://karen.zzzeeb.com/paintings.html">Painting</a></li>
+                    
+                  </ul>
+                </li>
+                <li><a href="about-me.html">About Me</a></li>
+                <li><a href="MSGT.html">MSGT Labs</a></li>
+                <li><a href="mailto:kzeeb@uw.edu">Contact</a></li>
+              </ul>
+            </nav>
+
+        </div>
+
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="https://adventuresinmapping.com/2016/06/09/how-to-sharknado-map/">The (Interactive) Global Sharknado Threat</a></h2>
+								<p>
+									Lifted directly from John Nelson using his styling, I present an interactive web-based version of his instant classic <a href="https://adventuresinmapping.com/2016/06/09/how-to-sharknado-map/">The Global Sharknado Threat </a>map
+								</p>
+							</header>
+							<a href="https://adventuresinmapping.com/2016/06/09/how-to-sharknado-map/" class="image featured"><img src="images/globalsharknadothreat.jpg" alt="Sharknado Map" /></a>
+							<p>
+								In John's words, "This is The Global Sharknado Threat Map. Created by an unprecedentedly cross-discipline team of nameless chain-smoking scientists in white lab coats, this map is intended as a resource to coastal communities regarding the nature and likelihood of a sharknado incursion. Right?"
+							</p>
+							<p>
+								In my words - this map is amazing. I'm using the data on his tutorial page from noaa hurricanes since 1891, catagories 3, 4 and 5 plus Great White and Hammerhead shark populations and habitat data.
+							<section>
+								<header>
+									<h3>The Hurricane - Shark Habitat Slider Map</h3>
+								</header>
+								<style>
+body {
+    overflow: hidden;
+}
+
+body * {
+   -webkit-touch-callout: none;
+     -webkit-user-select: none;
+        -moz-user-select: none;
+         -ms-user-select: none;
+             user-select: none;
+}
+
+.map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+</style>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css' type='text/css' />
+
+<div id='before' class='map'></div>
+<div id='after' class='map'></div>
 <script>
-mapboxgl.accessToken = '<your access token here>';
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v9',
+mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
+var beforeMap = new mapboxgl.Map({
+    container: 'before',
+    style: 'mapbox://styles/kzeeb/cjo7ciqb1254t2smro47yyty0',
+    center: [0, 0],
     zoom: 0
 });
 
-var url = 'https://wanderdrone.appspot.com/';
-map.on('load', function () {
-    window.setInterval(function() {
-        map.getSource('drone').setData(url);
-    }, 2000);
-
-    map.addSource('drone', { type: 'geojson', data: url });
-    map.addLayer({
-        "id": "drone",
-        "type": "symbol",
-        "source": "drone",
-        "layout": {
-            "icon-image": "rocket-15"
-        }
-    });
+var afterMap = new mapboxgl.Map({
+    container: 'after',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [0, 0],
+    zoom: 0
 });
-</script>
 
-</body>
+var map = new mapboxgl.Compare(beforeMap, afterMap, {
+    // Set this to enable comparing two maps by mouse movement:
+    // mousemove: true
+});
+    //on map load, do some stuff
+	
+			map.on('load', function(){
+				//add a source layer for earthquakes
+				map.addSource('earthquakes', {
+			        "type": "geojson",
+			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+			    });
+			    //add the earthquakes to the map
+			    map.addLayer({
+			    	"id":"equakes",
+			    	"type":"circle",
+				"source":"earthquakes",
+				"circle-color": [
+				    'range',
+				    ['get', 'mag'],
+				    '1-3', '#FFCCCC',
+				    '3.1-5', '#FF6666',
+				    '5.1-6.5', '#E3170D',
+				    '6.6-11', '#8B0000',
+				]
+    });
+ });
+
+				//add a handler for clicking/popups 
+				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+				map.on('click', 'equakes', function (e) {
+			        var coordinates = e.features[0].geometry.coordinates.slice();
+			        //print the properties to the console when clicked
+			        console.log(e.features[0].properties);
+			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
+			        var description = "<p>Mag: " + e.features[0].properties.mag 
+				+ "<br>Location: " + e.features[0].properties.place 
+				+ "<br>Link: "+"<a href='"+e.features[0].properties.url+"'>Click here</a></p>";
+			        //var description = e.features[0].properties.mag;
+
+
+			        // Ensure that if the map is zoomed out such that multiple
+			        // copies of the feature are visible, the popup appears
+			        // over the copy being pointed to.
+			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        }
+			        //make the popup
+			        new mapboxgl.Popup()
+			            .setLngLat(coordinates)
+			            .setHTML(description)
+			            .addTo(map);
+ });
+</script>
+								<p>
+									Nascetur volutpat nibh ullamcorper vivamus at purus. Cursus ultrices porttitor sollicitudin imperdiet
+									at pretium tellus in euismod a integer sodales neque. Nibh quis dui quis mattis eget imperdiet venenatis
+									feugiat. Neque primis ligula cum erat aenean tristique luctus risus ipsum praesent iaculis. Fermentum elit
+									fringilla consequat dis arcu. Pellentesque mus tempor vitae pretium sodales porttitor lacus. Phasellus
+									egestas odio nisl duis sociis purus faucibus morbi. Eget massa mus etiam sociis pharetra magna.
+								</p>
+								<p>
+									Eleifend auctor turpis magnis sed porta nisl pretium. Aenean suspendisse nulla eget sed etiam parturient
+									orci cursus nibh. Quisque eu nec neque felis laoreet diam morbi egestas. Dignissim cras rutrum consectetur
+									ut penatibus fermentum nibh erat malesuada varius.
+								</p>
+							</section>
+
+							<section>
+								<header>
+									<h3>Augue euismod feugiat tempus</h3>
+								</header>
+								<p>
+									Pretium tellus in euismod a integer sodales neque. Nibh quis dui quis mattis eget imperdiet venenatis
+									feugiat. Neque primis ligula cum erat aenean tristique luctus risus ipsum praesent iaculis. Fermentum elit
+									ut nunc urna volutpat donec cubilia commodo risus morbi. Lobortis vestibulum velit malesuada ante
+									egestas odio nisl duis sociis purus faucibus morbi. Eget massa mus etiam sociis pharetra magna.
+								</p>
+							</section>
+						</article>
+						<hr />
+						<div class="row">
+							<article class="col-4 col-12-mobile special">
+								<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
+								<header>
+									<h3><a href="#">Gravida aliquam penatibus</a></h3>
+								</header>
+								<p>
+									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
+									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
+								</p>
+							</article>
+							<article class="col-4 col-12-mobile special">
+								<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+								<header>
+									<h3><a href="#">Sed quis rhoncus placerat</a></h3>
+								</header>
+								<p>
+									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
+									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
+								</p>
+							</article>
+							<article class="col-4 col-12-mobile special">
+								<a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+								<header>
+									<h3><a href="#">Magna laoreet et aliquam</a></h3>
+								</header>
+								<p>
+									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
+									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
+								</p>
+							</article>
+						</div>
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+        <div id="footer">
+          <div class="container">
+            <div class="row">
+
+              <!-- Tweets -->
+                <section class="col-4 col-12-mobile">
+                        <header>
+                          <h3><a href="https://www.instagram.com/karenzeeb_art/">Instagram</a></h3>
+                        </header>     
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+
+              <!-- Posts -->
+                <section class="col-4 col-12-mobile">
+                  <header>
+                          <h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">My Resume</a></h3>
+                        </header>
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+              <section class="col-4 col-12-mobile">
+                  <header>
+                          <h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">Visit my LinkedIn</a></h3>
+                        </header>
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+            <hr />
+            <div class="row">
+              <div class="col-12">
+
+                <!-- Contact -->
+                  <section class="contact">
+                    <header>
+                      <h3>Love this website template? Me too!</h3>
+                    </header>
+                    <p>You can find this, and more at <a href="http://html5up.net">HTML5 UP.</p>
+                    
+                  </section>
+
+                <!-- Copyright -->
+                  <div class="copyright">
+                    <ul class="menu">
+                      <li>&copy; Karen Zeeb 2018. All rights reserved.</li>
+                    </ul>
+                  </div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
