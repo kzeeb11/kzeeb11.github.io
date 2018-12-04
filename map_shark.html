@@ -1,0 +1,28 @@
+<!DOCTYPEhtml>
+<html>
+<head>
+
+	<!-- the mapbox libraries -->
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+	<div id='map' style='width: 400px; height: 400px;'></div>
+	<!-- the script that controls the map -->
+		<script>
+			//my Mapbox token
+			mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
+			
+			//The map variable
+			var map = new mapboxgl.Map({
+			    container: 'map',
+			    style: 'mapbox://styles/kzeeb/cjokfogz701402sp3fhqec8r5',
+			});
+			//set the center & zoom of the map
+			map.setCenter([-85, 44]);
+			map.setZoom(3);
+			
+				
+		</script>
+</body>				
+</html>
