@@ -43,7 +43,7 @@ map.on("load", function () {
       });
       // create the popup
 var popup = new mapboxgl.Popup({ offset: 25 })
-    .setText('An ideal combination of risk factors along the Eastern Seaboard of the United States characterizes an existential risk of sharknado events.');
+    .setText('An ideal combination of risk factors along the Eastern Seaboard of the United States characterizes an existential risk of sharknado incursion.');
 
 // create DOM element for the marker
 var el = document.createElement('div');
@@ -51,7 +51,7 @@ el.id = 'marker';
 
 // create the marker
 new mapboxgl.Marker(el)
-    .setLngLat(-78.79749,35.87049)
+    .setLngLat[-78.79749,35.87049]
     .setPopup(popup) // sets a popup on this marker
     .addTo(map);
     });
