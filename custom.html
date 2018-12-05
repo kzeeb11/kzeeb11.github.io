@@ -30,7 +30,7 @@
 </head>
 
 <body>
-  <div id="map" style='width: 100vw; height: 100vh;'></div>
+  <div id="map"></div>
   <div id='state-legend' class='legend'>
     <img src="images/legend.png" style="height:200px;">
   </div>
@@ -71,11 +71,11 @@ map.on("load", function () {
   /* Image: An image is loaded and added to the map. */
   map.loadImage("hexicon3.png", function(error, image) {
       if (error) throw error;
-      map.addImage("custom-marker2", image);
+      map.addImage("custom-marker", image);
       /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
       map.addLayer({
-        id: "markers2",
-        type: "symbol2",
+        id: "markers",
+        type: "symbol",
         /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
         source: {
           type: "geojson",
@@ -84,7 +84,7 @@ map.on("load", function () {
             features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-118.122613,29.751664]}}]}
         },
         layout: {
-          "icon-image2": "custom-marker2",
+          "icon-image": "custom-marker",
         }
       });
       // create the popup
