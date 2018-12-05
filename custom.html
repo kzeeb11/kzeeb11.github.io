@@ -71,11 +71,11 @@ map.on("load", function () {
   /* Image: An image is loaded and added to the map. */
   map.loadImage("hexicon3.png", function(error, image) {
       if (error) throw error;
-      map.addImage("custom-marker", image);
+      map.addImage("custom-marker2", image);
       /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
       map.addLayer({
-        id: "markers",
-        type: "symbol",
+        id: "markers2",
+        type: "symbol2",
         /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
         source: {
           type: "geojson",
@@ -84,7 +84,7 @@ map.on("load", function () {
             features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-118.122613,29.751664]}}]}
         },
         layout: {
-          "icon-image": "custom-marker",
+          "icon-image2": "custom-marker2",
         }
       });
       // create the popup
