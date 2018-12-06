@@ -70,11 +70,14 @@ map.on("load", function () {
   map.loadImage("hexicon3.png", function(error, image) {
       if (error) throw error;
       map.addImage("custom-marker2", image);
-      
+      /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
+      map.addLayer2({
+        id: "markers",
+        type: "symbol",
         /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
         source: {
           type: "geojson",
-          data: 
+          data: {
             type: "FeatureCollection",
             features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-118.122613,29.751664]}}]}
         },
