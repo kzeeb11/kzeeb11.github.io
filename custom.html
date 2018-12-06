@@ -65,16 +65,6 @@ map.on("load", function () {
         layout: {
           "icon-image": "custom-marker",
         }
-      });
-
-  map.loadImage("hexicon3.png", function(error, image) {
-      if (error) throw error;
-      map.addImage("custom-marker2", image);
-      /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
-      map.addLayer({
-        id: "markers",
-        type: "symbol",
-        /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
         source: {
           type: "geojson",
           data: {
@@ -84,6 +74,7 @@ map.on("load", function () {
         layout: {
           "icon-image": "custom-marker2",
         }
+      });
       });
       // create the popup
 var popup = new mapboxgl.Popup({ offset: 25 })
@@ -98,6 +89,8 @@ new mapboxgl.Marker(el)
     .setLngLat[-78.79749,35.87049]
     .setPopup("custom-marker") // sets a popup on this marker
     .addTo(map);
+
+
           });
         });
       });
