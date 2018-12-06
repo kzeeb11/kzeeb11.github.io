@@ -65,13 +65,26 @@ map.on("load", function () {
         layout: {
           "icon-image": "custom-marker",
         }
-       features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-118.122613,29.751664]}}]}
+      });
+
+  map.loadImage("hexicon3.png", function(error, image) {
+      if (error) throw error;
+      map.addImage("custom-marker2", image);
+      /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
+      map.addLayer({
+        id: "markers",
+        type: "symbol",
+        /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
+        source: {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-118.122613,29.751664]}}]}
         },
         layout: {
           "icon-image": "custom-marker2",
         }
       });
-     
       // create the popup
 var popup = new mapboxgl.Popup({ offset: 25 })
     .setText('An ideal combination of risk factors along the Eastern Seaboard of the United States characterizes an existential risk of sharknado incursion.');
@@ -85,8 +98,6 @@ new mapboxgl.Marker(el)
     .setLngLat[-78.79749,35.87049]
     .setPopup("custom-marker") // sets a popup on this marker
     .addTo(map);
-
-
           });
         });
       });
