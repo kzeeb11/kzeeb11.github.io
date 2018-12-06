@@ -79,7 +79,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/kzeeb/cjp4b5wqr3tqh2snxjtg8gwic',
-  center: [-96, 37.8],
+  center: [-417, 28.8],
   zoom: 2
 });
 
@@ -128,6 +128,28 @@ var geojson = {
     properties: {
       title: '',
       description: 'Conditions are ripe along the northwestern coast of Australia - particularly for that of the hammerhead variety, whose aerodynamic properties facilitate sustained glide-times and, therefore, deeper inland penetration.'
+    }
+  },
+    {
+      type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-232.131027,31.266025]
+    },
+    properties: {
+      title: '',
+      description: 'Coastal areas of the Phillipines, Eastern China, and Southern Japan face a seasonally intense risk of sharknado occurrence of both species.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-309.205453,-22.580204]
+    },
+    properties: {
+      title: '',
+      description: 'The island of Madagascar is a well-known target of sharknado events. It is speculated that the plentiful forest lemur population is a popular seasonal attraction for feeding sharks.'
     }
   }]
 };
