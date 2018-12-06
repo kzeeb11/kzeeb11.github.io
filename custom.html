@@ -65,17 +65,14 @@ map.on("load", function () {
         layout: {
           "icon-image": "custom-marker",
         }
-        source: {
-          type: "geojson",
-          data: {
-            type: "FeatureCollection",
+        type: "FeatureCollection",
             features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-118.122613,29.751664]}}]}
         },
         layout: {
           "icon-image": "custom-marker2",
         }
       });
-      });
+     
       // create the popup
 var popup = new mapboxgl.Popup({ offset: 25 })
     .setText('An ideal combination of risk factors along the Eastern Seaboard of the United States characterizes an existential risk of sharknado incursion.');
