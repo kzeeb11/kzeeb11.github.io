@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-
+<html>
 <head>
-  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js"></script>  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css" rel="stylesheet" />  <style>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
     body { margin:0; padding:0; }
     #map { position:absolute; top:0; bottom:0; width:100%; }
   </style>
@@ -27,82 +33,120 @@
         width: 10px;
     }
   </style>
-</head>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .marker {
+  background-image: url('hexicon3.png');
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  background-color: #8b0000;
+  color: #ffff;
+  text-align: center;
+  font-family: 'Courier', serif;
+}
+    </style>
+</head>
 <body>
-  <div id="map"></div>
-  <div id='state-legend' class='legend'>
+
+<div id='map'></div>
+<div id='state-legend' class='legend'>
     <img src="images/legend.png" style="height:200px;">
   </div>
 
-  <script>
-mapboxgl.accessToken = "pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw";
+<script>
 
-/* Map: This represents the map on the page. */
+mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
+
 var map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/kzeeb/cjp4b5wqr3tqh2snxjtg8gwic",
-  zoom:3.0,
-  center: [-92.001657,34.415973]
+  container: 'map',
+  style: 'mapbox://styles/kzeeb/cjp4b5wqr3tqh2snxjtg8gwic',
+  center: [-96, 37.8],
+  zoom: 3
 });
 
-map.on("load", function () {
-  /* Image: An image is loaded and added to the map. */
-  map.loadImage("hexicon2.png", function(error, image) {
-      if (error) throw error;
-      map.addImage("custom-marker", image);
-      /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
-      map.addLayer({
-        id: "markers",
-        type: "symbol",
-        /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
-        source: {
-          type: "geojson",
-          data: {
-            type: "FeatureCollection",
-            features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-79.83638615338047,31.795877576801843]}}]}
-        },
-        layout: {
-          "icon-image": "custom-marker",
-        }
-      });
 
-  map.loadImage("hexicon3.png", function(error, image) {
-      if (error) throw error;
-      map.addImage("custom-marker2", image);
-      /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
-      map.addLayer({
-        id: "markers",
-        type: "symbol",
-        /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
-        source: {
-          type: "geojson",
-          data: {
-            type: "FeatureCollection",
-            features:[{"type":"Feature","geometry":{"type":"Point","coordinates":[-118.122613,29.751664]}}]}
-        },
-        layout: {
-          "icon-image": "custom-marker2",
-        }
-      });
-      // create the popup
-var popup = new mapboxgl.Popup({ offset: 25 })
-    .setText('An ideal combination of risk factors along the Eastern Seaboard of the United States characterizes an existential risk of sharknado incursion.');
+var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.122613,29.751664]
+    },
+    properties: {
+      title: '',
+      description: 'Southern California coastal areas skirt shark-rich habitats, though tornadoes of sufficient shark-projectile potential are exceedingly rare. A dramatic exception was recently documented by film crews at tremendous personal peril.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-79.83638615338047,31.795877576801843]
+    },
+    properties: {
+      title: '',
+      description: 'An ideal combination of risk factors along the Eastern Seaboard of the United States characterizes an existential risk of sharknado events.'
+    }
+  },
+    {
+      type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-24.920320,18.326713]
+    },
+    properties: {
+      title: '',
+      description: 'Reports of shark schools swimming in coordinated rotational patterns, preventing natural cool-water upwelling, indicates deliberate staging areas for the creation of violent maritime atmospheric energies.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-250.879430,-19.728723]
+    },
+    properties: {
+      title: '',
+      description: 'Conditions are ripe along the northwestern coast of Australia - particularly for that of the hammerhead variety, whose aerodynamic properties facilitate sustained glide-times and, therefore, deeper inland penetration.'
+    }
+  }]
+};
+// add markers to map
+geojson.features.forEach(function(marker) {
 
-// create DOM element for the marker
-var el = document.createElement('div');
-el.id = 'marker';
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
 
-// create the marker
-new mapboxgl.Marker(el)
-    .setLngLat[-78.79749,35.87049]
-    .setPopup("custom-marker") // sets a popup on this marker
-    .addTo(map);
-          });
-        });
-      });
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+  .setLngLat(marker.geometry.coordinates)
+  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+  .setHTML('<h5>' + marker.properties.title + '</h5><p>' + marker.properties.description + '</p>'))
+  .addTo(map);
+});
 
-  </script>
+</script>
 
 </body>
 </html>
