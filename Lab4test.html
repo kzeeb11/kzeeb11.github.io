@@ -162,13 +162,26 @@
   subdomains: 'abcd',
   minZoom: 0,
   maxZoom: 20,
-  minZoom: 2,
-  maxZoom: 16,
-  zoomControl: false,
+  
   ext: 'png'
 })
 
-map.addControl(new L.Control.ZoomMin())
+var extentControl = L.Control.extend({
+options: {
+    position: 'topleft'
+},
+onAdd: function (map) {
+    var llBounds = map.getBounds();
+    var container = L.DomUtil.create('div', 'extentControl');
+    $(container).css('background', 'url(i/extent.png) no-repeat 50% 50%').css('width', '26px').css('height', '26px').css('outline', '1px black');
+    $(container).on('click', function () {
+        map.fitBounds(llBounds);
+    });
+    return container;
+   }
+})
+
+map.addControl(new extentControl());
  
 map2.addLayer(Stamen_Toner);
 	      
