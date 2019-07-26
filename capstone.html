@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Health Equity in Pierce County</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 600px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    <title>MSGT Capstone</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.css"/>
+  <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.Default.css"/>
+  <script src="Leaflet.markercluster-master/dist/leaflet.markercluster-src.js"></script>
+  </head>
+  <body class="right-sidebar is-preload">
+    <div id="page-wrapper">
+
+      <!-- Header -->
+        <div id="header">
+
+          <!-- Inner -->
+             <div class="inner"><d<header>
+                <h1><a href="index.html" id="logo">Karen Zeeb • MSGT Capstone</a></h1>
+              </header>
+            </div>
+
+          <!-- Nav -->
+            <nav id="nav">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                  <a href="#">Portfolios</a>
+                  <ul>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-carto-portfolio-2018">Cartography</a></li>
+                    <li><a href="https://www.slideshare.net/KarenZeeb1/zeeb-design-portfolio-2018">Design</a></li>
+                    <li><a href="http://karen.zzzeeb.com/paintings.html">Painting</a></li>
+                    
+                  </ul>
+                </li>
+                <li><a href="about-me.html">About Me</a></li>
+                <li><a href="mailto:kzeeb@uw.edu">Contact</a></li>
+              </ul>
+            </nav>
+
+        </div>
+<div class="wrapper style1">
+          <article id="main" class="container special">
+            <header>
+              <h2>Health Equity in Pierce County, WA</h2>
+              <p>
+                A closer look at the health of residents in the South puget Sound 
+              </p>
+            </header>
+            <p>
+              Leaflet map using geojson data for Michigan bridge ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the shapefile in ARC, selected bridges by safety rating and saved the individual layers. I used QGIS to convert the new shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. TI am woring on creating a toggle legend for good, fair, or poor bridge rating.</a></p>
+    <p><br></br></p>
+</article>
+<iframe width="100%" height="800px" src="https://uwt-gis-geotech.maps.arcgis.com/apps/MapSeries/index.html?appid=4c5c0f3a43be4d5ba611c5251a13a3d2" frameborder="0" scrolling="no"></iframe>
+
+    <!-- Footer -->
+        <div id="footer">
+          <div class="container">
+            <div class="row">
+
+              <!-- Tweets -->
+                <section class="col-4 col-12-mobile">
+                  <header>
+                    <h2 class="icon fa-instagram circled"><span class="label">Tweets</span></h2>
+                  </header>
+                  <ul class="divided">
+                    <li>
+                      <article class="post stub">
+                        <header>
+                          <h3><a href="https://www.instagram.com/karenzeeb_art/">Instagram</a></h3>
+                        </header>     
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+
+              <!-- Posts -->
+                <section class="col-4 col-12-mobile">
+                  <header>
+                    <h2 class="icon fa-file-text circled"><span class="label">Posts</span></h2>
+                  </header>
+                  <ul class="divided">
+                    <li>
+                      <article class="post stub">
+                        <header>
+                          <h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">My Resume</a></h3>
+                        </header>
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+              <section class="col-4 col-12-mobile">
+                  <header>
+                    <h2 class="icon fa-linkedin circled"><span class="label">Posts</span></h2>
+                  </header>
+                  <ul class="divided">
+                    <li>
+                      <article class="post stub">
+                        <header>
+                          <h3><a href="https://www.linkedin.com/in/karen-zeeb-69747b117">Visit my LinkedIn</a></h3>
+                        </header>
+                      </article>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+            <hr />
+            <div class="row">
+              <div class="col-12">
+
+                <!-- Contact -->
+                  <section class="contact">
+                    <header>
+                      <h3>Love this website template? Me too!</h3>
+                    </header>
+                    <p>You can find this, and more at <a href="http://html5up.net">HTML5 UP.</p>
+                    
+                  </section>
+
+                <!-- Copyright -->
+                  <div class="copyright">
+                    <ul class="menu">
+                      <li>&copy; Karen Zeeb 2018. All rights reserved.</li>
+                    </ul>
+                  </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/jquery.dropotron.min.js"></script>
+      <script src="assets/js/jquery.scrolly.min.js"></script>
+      <script src="assets/js/jquery.scrollex.min.js"></script>
+      <script src="assets/js/browser.min.js"></script>
+      <script src="assets/js/breakpoints.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <script src="assets/js/main.js"></script>
+
+  </body>
+</html>
+  </body>
+</html>
