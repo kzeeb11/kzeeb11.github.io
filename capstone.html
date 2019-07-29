@@ -14,16 +14,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-   crossorigin=""></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.css"/>
-  <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.Default.css"/>
-  <script src="Leaflet.markercluster-master/dist/leaflet.markercluster-src.js"></script>
   </head>
   <body class="right-sidebar is-preload">
     <div id="page-wrapper">
@@ -61,14 +51,30 @@
             <header>
               <h2>Health Equity in Pierce County, WA</h2>
               <p>
-                A closer look at the health of residents in the South puget Sound 
+                A closer look at the health of residents in the South Puget Sound 
               </p>
             </header>
             <p>
-              Leaflet map using geojson data for Michigan bridge ratings. The information was obtained from Michigan Department of Transportation, and includes data on all the bridges in the state. I put the shapefile in ARC, selected bridges by safety rating and saved the individual layers. I used QGIS to convert the new shapefiles into geojson and added them to my Leaflet map. I used the cluster plug-in for the bridge points, and linked the pop-up to bridge location. TI am woring on creating a toggle legend for good, fair, or poor bridge rating.</a></p>
+              This series of maps highlights aspects of health such as disease rates and life expectancy. This data is presented as an interactive series, controlled by the tabs at the top of the map, with the legend and map information in the corresponding sidebar. A sequential color ramp was chosen in shades of crimson for immediate recognition of the areas of concern where the lighter areas have  greater health equity.</a></p>
     <p><br></br></p>
 </article>
 <iframe width="100%" height="800px" src="https://uwt-gis-geotech.maps.arcgis.com/apps/MapSeries/index.html?appid=4c5c0f3a43be4d5ba611c5251a13a3d2" frameborder="0" scrolling="no"></iframe>
+
+<div class="wrapper style2">
+          <article id="main" class="container special">
+            <header>
+              <br></br>
+              <h2>For comparison</a></h2>
+              <p>
+                Original Tacoma-Pierce County Health Department Maps 
+              </p>
+            </header>
+            <p>
+              These are the maps currently being used the Tacoma-Pierce County Health Department. They use a default, nominal color ramp of green to red, where the sequential data cannot be easily discerned.</p>
+              <a href="#" class="image featured"><img src="images/uglymaps.png" alt="Original Maps"/></a>
+    <p><br></br></p>
+</article>
+<div id="map"></div>
 
     <!-- Footer -->
         <div id="footer">
