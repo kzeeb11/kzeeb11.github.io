@@ -64,116 +64,118 @@
         </div>
 	  <p></p>
 	<body>
-		<!-- the div for the map -->
-		<!-- note the style is in-line, we have been putting it in the header. Outcome is the same -->
-		<div id='map' style='width: 100%; height: 400px;'></div>
-		<!-- the script that controls the map -->
-		<script>
-			//my Mapbox token
-			mapboxgl.accessToken = 'pk.eyJ1Ijoia3plZWIiLCJhIjoiY2l1NXFvZTQ1MGh5eTJ6bGgwZzMzb2xhcyJ9.cKBxgvZoWhW-oGe6cQI4Kw';
-			
-			//The map variable
-			var map = new mapboxgl.Map({
-			    container: 'map',
-			    style: 'mapbox://styles/kzeeb/cjo7ciqb1254t2smro47yyty0',
-			});
-			//set the center & zoom of the map
-			map.setCenter([-85, 76]);
-			map.setZoom(2);
+	<!-- Carousel -->
+        <section class="carousel">
+          <div class="reel">
 
-			//on map load, do some stuff
-			map.on('load', function(){
-				//add a source layer for earthquakes
-				map.addSource('earthquakes', {
-			        "type": "geojson",
-			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
-			    });
-			    //add the earthquakes to the map
-			    map.addLayer({
-			    	"id":"equakes",
-			    	"type":"circle",
-				"source":"earthquakes",
-				"paint": {
-					'circle-color': {
-					property:'mag',
-					stops: [
-					[2, '#f46b0f'],
-					[5, '#0b6f95'],
-					[7, '#7f2200'],
-					[10, '#f40fdf']
-					]
-					},
-				 // Add data-driven styles for circle radius
-					 'circle-radius': {
-					 property: 'mag',
-					 type: 'exponential',
-					 stops: [
-					[2, 3],
-					[4, 5],
-					[6, 7],
-					[8, 8],
-					[10, 12]
-					]
-     				 	}
-				}		
-						
-	 });				
- });
+          <article>
+              <a href="images/Ishi_Poster.jpg" class="image featured"><img src="images/Ishi_sm2.jpg" alt="Ishi Wilderness" /></a>
+              <header>
+                <h3><a href="images/Ishi_Poster.jpg">Ishi Wilderness</a></h3>
+              </header>
+              <p>My first map for the US Forest Service. It's extra...it'll be published next year.</p>
+            </article>
+            
+            <article>
+              <a href="images/High Park_screen.jpg" class="image featured"><img src="images/HP_small1.jpg" alt="High Park Fire" /></a>
+              <header>
+                <h3><a href="images/High Park_screen.jpg">High Park Fire</a></h3>
+              </header>
+              <p>This map just won second place in the 2019 EsriUC Map Gallery</p>
+            </article>
+            
+            <article>
+              <a href="images/Zeeb_Black Map.jpg" class="image featured"><img src="images/pic01.jpg" alt="Tacoma Black Map" /></a>
+              <header>
+                <h3><a href="images/Zeeb_Black Map.jpg">Tacoma Black Map</a></h3>
+              </header>
+              <p>This map will be published in the 2018 ESRI Map Book #34 - out in June 2019.</p>
+            </article>
 
-				//add a handler for clicking/popups 
-				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
-				map.on('click', 'equakes', function (e) {
-			        var coordinates = e.features[0].geometry.coordinates.slice();
-			        //print the properties to the console when clicked
-			        console.log(e.features[0].properties);
-			        //THE HTML ELEMENT THAT WILL GO IN THE POPUP
-			        var description = "<p>Mag: " + e.features[0].properties.mag 
-				+ "<br>Location: " + e.features[0].properties.place 
-				+ "<br>Link: "+"<a href='"+e.features[0].properties.url+"'>Click here</a></p>";
-			        //var description = e.features[0].properties.mag;
+            <article>
+              <a href="images/FSmap_grid.jpg" class="image featured"><img src="images/pic02.jpg" alt="Seattle & Tacoma Ports Map" /></a>
+              <header>
+                <h3><a href="images/FSmap_grid.jpg">Seattle & Tacoma Ports Map</a></h3>
+              </header>
+              <p>This map was published in the 2017 ESRI Map Book 33.</p>
+            </article>
+
+            <article>
+              <a href="images/WashPark_Map.pdf" class="image featured"><img src="images/pic03.jpg" alt="Washington Park" /></a>
+              <header>
+                <h3><a href="images/WashPark_Map.pdf">Washington Park Map</a></h3>
+              </header>
+              <p>Regional map of Washington Park, its in Portland and its pretty legit.</p>
+            </article>
+
+            <article>
+              <a href="images/NHTrucker.jpg" class="image featured"><img src="images/pic05.jpg" alt="Port of Seattle Map" /></a>
+              <header>
+                <h3><a href="images/NHTrucker.jpg">Port of Seattle Map</a></h3>
+              </header>
+              <p>This map won 3rd Place at the 2017 ESRIUC Map Gallery.</p>
+            </article>
+
+            <article>
+              <a href="images/Godzilla.jpg" class="image featured"><img src="images/pic04.jpg" alt="Godzilla Destroys" /></a>
+              <header>
+                <h3><a href="images/Godzilla.jpg">Godzilla Destroys Map</a></h3>
+              </header>
+              <p>Independent project highlighting Godzilla attacks since 1954.</p>
+            </article>
+
+            <article>
+              <a href="images/SHMap.jpg" class="image featured"><img src="images/pic01_1.jpg" alt="South Harbor Map" /></a>
+              <header>
+                <h3><a href="images/SHMap.jpg">South Harbor Map</a></h3>
+              </header>
+              <p>Regional Port of Tacoma map highlighting the tideflats.</p>
+           </article>
+            
+            <article>
+              <a href="images/Congo_v2.pdf" class="image featured"><img src="images/congosm.jpg" alt="Congo: The Map" /></a>
+              <header>
+                <h3><a href="imagesCongo_v2.pdf">Congo: The Map</a></h3>
+              </header>
+              <p>Highlights the dangers encountered by the 1995 Travicom Expedition</p>
+            </article>
+            
+            <article>
+              <a href="images/Zeeb_Churchill_Atlas.pdf" class="image featured"><img src="images/honey.jpg" alt="Migration of Honey Map" /></a>
+              <header>
+                <h3><a href="images/Zeeb_Churchill_Atlas.pdf">Migration of a Word Map</a></h3>
+              </header>
+              <p>For Guerrilla Cartography Atlas in a Day Challenge 2019</p>
+            </article>
+            
+            <article>
+              <a href="images/CampusMap_Final.jpg" class="image featured"><img src="images/pic_UWT.jpg" alt="UWT Campus Map" /></a>
+              <header>
+                <h3><a href="images/CampusMap_Final.jpg">UWT Campus Map</a></h3>
+              </header>
+              <p>University of Washington (Tacoma) Campus Historic Buildings.</p>
+            </article>
+
+            <article>
+              <a href="images/WWGT.jpg" class="image featured"><img src="images/pic02_2.jpg" alt="Women in STEM" /></a>
+              <header>
+                <h3><a href="images/WWGT.jpg">Women in STEM Map</a></h3>
+              </header>
+              <p>WWGT Group collaboration - won 1st place at 2018 WAURISA.</p>
+            </article>
 
 
-			        // Ensure that if the map is zoomed out such that multiple
-			        // copies of the feature are visible, the popup appears
-			        // over the copy being pointed to.
-			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-			        }
-			        //make the popup
-			        new mapboxgl.Popup()
-			            .setLngLat(coordinates)
-			            .setHTML(description)
-			            .addTo(map);
- });
-		</script>
-			<p></p>
-				
-		<div id="map2"></div>
-      <script>
+            <article>
+              <a href="images/TB Map.JPG" class="image featured"><img src="images/pic04_4.jpg" alt="Ted Bundy" /></a>
+              <header>
+                <h3><a href="images/TB Map.JPG">Ted Bundy 1974-1978</a></h3>
+              </header>
+              <p>Study of Ted Bundy's criminal activity across the United States.</p>
+            </article>
+              
 
-  // initialize the map
-  var map2 = new L.map('map2').setView([43.5, -85.6], 5);
-
-  // base map
-  var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-});
-  
-map2.addLayer(Stamen_Toner);
-	      
-  //add a KML layer - uses cors-anywhere to bypass the CORS restrictions on NOAA. TEMPORARY WORKAROUND, Eventually need to hook up a server instead of doing it this way. 
-			var firelayer = omnivore.kml('https://cors-anywhere.herokuapp.com/https://firms.modaps.eosdis.nasa.gov/active_fire/c6/kml/MODIS_C6_USA_contiguous_and_Hawaii_24h.kml');
-				
-			map2.addLayer(firelayer);
-		</script>
-	</body>
-	   </section>
-
-        </div>
+          </div>
+        </section>
 <p></p>
 <!-- Footer -->
 		<div id="footer">
